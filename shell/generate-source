@@ -11,4 +11,6 @@ cd source
 git clone https://github.com/gaiusm/penguin-tower
 git clone https://github.com/gaiusm/chess-shell
 git clone https://github.com/gaiusm/pge
+
+git clone https://github.com/Schol-R-LEA/Modula-2-Portable-Bit-Manipulation
 git clone https://github.com/m2sf/m2bsk

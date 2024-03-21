@@ -8,6 +8,7 @@ cd source
 
 
 function new_srcdir_build () {
+    result=pass
     echo "building: $1"
     cd $1
     rm -rf build
@@ -16,9 +17,17 @@ function new_srcdir_build () {
 }
 
 
+function failure () {
+    result=fail
+}
+
 function success () {
     cd ../..
-    echo "successfully built: $1"
+    if [ "${result}" == "pass" ] ; then
+	echo "successfully built: $1"
+    else
+	echo "failed to build: $1"
+    fi
 }
 
 
@@ -48,15 +57,26 @@ function build_pge () {
 
 function build_m2bsk () {
     new_srcdir_build m2bsk
-    for i in  ../src/lib/imp/*.mod ; do
-	echo gm2 -c -g -I../src/lib  $i
-	gm2 -c -g -I../src/lib  $i
+    for i in ../src/lib/imp/*.mod ; do
+	echo gm2 -c -g -I../src/lib $i
+	gm2 -c -g -I../src/lib $i || failure
     done
     success m2bsk
 }
 
 
+function build_schol_r_lea () {
+    new_srcdir_build Modula-2-Portable-Bit-Manipulation
+    for i in ../impls/portable/*.mod ; do
+	echo gm2 -c -g -I../defs $i
+	gm2 -c -g -I../defs $i || failure
+    done
+    success Modula-2-Portable-Bit-Manipulation
+}
+
 build_pge
 build_chess_shell
 build_penguin_tower
+
 build_m2bsk
+build_schol_r_lea

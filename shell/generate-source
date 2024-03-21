@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "press enter to remove source directory or ^C to abort"
+read ans
+rm -rf source
+mkdir source
+cd source
+
+git clone https://github.com/gaiusm/penguin-tower
+git clone https://github.com/gaiusm/chess-shell
+git clone https://github.com/gaiusm/pge
+git clone https://github.com/m2sf/m2bsk

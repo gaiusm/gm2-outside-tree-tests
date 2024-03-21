@@ -1,9 +1,11 @@
 #!/bin/bash
 
-echo "press enter to remove source directory or ^C to abort"
-read ans
-rm -rf source
-mkdir source
+if [ -d source ] ; then
+    echo "press enter to remove source directory or ^C to abort"
+    read ans
+    rm -rf source
+fi
+mkdir -p source
 cd source
 
 git clone https://github.com/gaiusm/penguin-tower

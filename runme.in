@@ -1,9 +1,9 @@
-!/bin/bash
+#!/bin/bash
 
 srcdir=@srcdir@
 
 if [ ! -d source ] ; then
-   ${srcdir}/generate-source
+   ${srcdir}/shell/generate-source
 fi
 
-${srcdir}/compile-source
+${srcdir}/shell/compile-source

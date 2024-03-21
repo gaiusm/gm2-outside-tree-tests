@@ -1,0 +1,9 @@
+!/bin/bash
+
+srcdir=@srcdir@
+
+if [ ! -d source ] ; then
+   ${srcdir}/generate-source
+fi
+
+${srcdir}/compile-source

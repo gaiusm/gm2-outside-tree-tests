@@ -3,7 +3,7 @@
 export PATH=$HOME/opt/bin:$PATH
 
 # we error out on the first failure.
-# set -e
+set -e
 cd source
 
 
@@ -18,7 +18,7 @@ function new_srcdir_build () {
 
 function success () {
     cd ../..
-    echo "successfull built: $1"
+    echo "successfully built: $1"
 }
 
 
@@ -46,7 +46,7 @@ function build_pge () {
 }
 
 
-function build_bsk () {
+function build_m2bsk () {
     new_srcdir_build m2bsk
     for i in  ../src/lib/imp/*.mod ; do
 	echo gm2 -c -g -I../src/lib  $i
@@ -59,4 +59,4 @@ function build_bsk () {
 build_pge
 build_chess_shell
 build_penguin_tower
-build_bsk
+build_m2bsk

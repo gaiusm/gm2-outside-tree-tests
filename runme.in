@@ -1,9 +1,10 @@
 #!/bin/bash
 
 srcdir=@srcdir@
+PRIVATEDIR=@PRIVATEDIR_VALUE@
 
 if [ ! -d source ] ; then
-   ${srcdir}/shell/generate-source
+   bash ${srcdir}/shell/generate-source ${PRIVATEDIR}
 fi
 
-${srcdir}/shell/compile-source
+bash ${srcdir}/shell/compile-source ${PRIVATEDIR}

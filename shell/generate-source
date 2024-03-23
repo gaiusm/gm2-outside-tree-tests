@@ -14,3 +14,21 @@ git clone https://github.com/gaiusm/pge
 
 git clone https://github.com/Schol-R-LEA/Modula-2-Portable-Bit-Manipulation
 git clone https://github.com/m2sf/m2bsk
+
+PRIVATEDIR=$1
+
+function generate_private_source () {
+    sourcedir=$(pwd)
+    cd ..
+    cd ${PRIVATEDIR}
+    for subdir in * ; do
+	if [ -d ${subdir} ] ; then
+	    cp -r ${subdir} ${sourcedir}
+	fi
+    done
+    cd ${sourcedir}
+}
+
+if [ ${PRIVATEDIR} != "NONE" ] ; then
+    generate_private_source
+fi

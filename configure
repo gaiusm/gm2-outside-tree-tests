@@ -618,6 +618,7 @@ PACKAGE_URL=''
 ac_unique_file="version.c"
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+PRIVATEDIR_VALUE
 GM2
 AM_BACKSLASH
 AM_DEFAULT_VERBOSITY
@@ -692,6 +693,7 @@ ac_subst_files=''
 ac_user_opts='
 enable_option_checking
 enable_silent_rules
+with_privatedir
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1322,6 +1324,13 @@ Optional Features:
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --enable-silent-rules   less verbose build output (undo: "make V=1")
   --disable-silent-rules  verbose build output (undo: "make V=0")
+
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-privatedir=<path>
+                          The top-level directory to the privatedir
+                          installation.
 
 Report bugs to <gaiusmod2@gmail.com>.
 _ACEOF
@@ -2607,6 +2616,25 @@ else
 printf "%s\n" "no" >&6; }
 fi
 
+
+
+
+# Check whether --with-privatedir was given.
+if test ${with_privatedir+y}
+then :
+  withval=$with_privatedir; if test -d "$with_privatedir"
+then :
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: Using privatedir from \"$with_privatedir\"" >&5
+printf "%s\n" "$as_me: Using privatedir from \"$with_privatedir\"" >&6;}
+else $as_nop
+  as_fn_error $? "Specify an existing directory for privatedir, not \"$with_privatedir\"" "$LINENO" 5
+fi
+else $as_nop
+  with_privatedir=NONE
+fi
+
+
+PRIVATEDIR_VALUE="$with_privatedir"
 
 
 ac_config_files="$ac_config_files Makefile runme"

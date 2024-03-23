@@ -21,7 +21,8 @@ function failure () {
     result=fail
 }
 
-function success () {
+
+function report () {
     cd ../..
     if [ "${result}" == "pass" ] ; then
 	echo "successfully built: $1"
@@ -35,7 +36,7 @@ function build_penguin_tower () {
     new_srcdir_build penguin-tower
     ../configure
     make
-    success penguin-tower
+    report penguin-tower
 }
 
 
@@ -43,7 +44,7 @@ function build_chess_shell () {
     new_srcdir_build chess-shell
     ../configure
     make
-    success chess-shell
+    report chess-shell
 }
 
 
@@ -51,7 +52,7 @@ function build_pge () {
     new_srcdir_build pge
     ../configure --enable-langm2
     make
-    success pge
+    report pge
 }
 
 
@@ -61,7 +62,7 @@ function build_m2bsk () {
 	echo gm2 -c -g -I../src/lib $i
 	gm2 -c -g -I../src/lib $i || failure
     done
-    success m2bsk
+    report m2bsk
 }
 
 
@@ -71,7 +72,22 @@ function build_schol_r_lea () {
 	echo gm2 -c -g -I../defs $i
 	gm2 -c -g -I../defs $i || failure
     done
-    success Modula-2-Portable-Bit-Manipulation
+    report Modula-2-Portable-Bit-Manipulation
+}
+
+PRIVATEDIR=$1
+
+function compile_private_source () {
+    for subdir in * ; do
+	if [ -d ${subdir} ] ; then
+	    if [ -f ${subdir}/compile-source ] ; then
+		echo "compiling private source for ${subdir}"
+		cd ${subdir}
+		bash compile-source ${subdir}
+		cd ..
+	    fi
+	fi
+    done
 }
 
 build_pge
@@ -80,3 +96,7 @@ build_penguin_tower
 
 build_m2bsk
 build_schol_r_lea
+
+if [ ${PRIVATEDIR} != "NONE" ] ; then
+    compile_private_source
+fi
